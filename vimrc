@@ -1,0 +1,3 @@
+:colo desert
+:syn on
+
