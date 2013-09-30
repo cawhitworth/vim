@@ -15,3 +15,12 @@ set number         " Line numbers FTW
 set showmatch      " Show matching brackets
 set incsearch      " Search-as-you-type
 
+set cc=80          " Highlight column 80
+
+set list
+set listchars=tab:>·,trail:·,extends:»,precedes:«
+                   " Show tabs, trailing spaces, and long lines
+
+if has("gui_running")
+    set lines=30 columns=85
+endif
