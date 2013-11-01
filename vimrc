@@ -1,6 +1,9 @@
 colo desert
 syn on
 
+filetype plugin on
+runtime macros/matchit.vim
+
 set nowrap         " Don't wrap
 
 set tabstop=4      " Indenting 4 chars, soft-tabs
