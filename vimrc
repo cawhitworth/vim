@@ -37,3 +37,5 @@ set statusline +=%=             " split
 set statusline +=%l/%L          " line/Length
 set statusline +=\ @\ %c\ (%P)
 hi StatusLine guifg=LightGray guibg=DarkGray ctermfg=7 ctermbg=8
+
+au BufRead,BufNewFile *.il setfiletype ilasm
