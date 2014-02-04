@@ -31,9 +31,9 @@ endif
 set noruler
 set laststatus=2
 set statusline=
-set statusline +=%<\ %n:%f\ %m  " Buffer, filename, modified
-set statusline +=%y             " Filetype
-set statusline +=%=             " split
-set statusline +=%l/%L          " line/Length
-set statusline +=\ @\ %c\ (%P)
+set statusline+=%<\ %n:%f\ %m  " Buffer, filename, modified
+set statusline+=%y             " Filetype
+set statusline+=%=             " split
+set statusline+=%l/%L          " line/Length
+set statusline+=\ @\ %c\ (%P)
 hi StatusLine guifg=LightGray guibg=DarkGray ctermfg=7 ctermbg=8
