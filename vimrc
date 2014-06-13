@@ -1,4 +1,3 @@
-
 execute pathogen#infect()
 
 colo desert
@@ -36,6 +35,33 @@ set hlsearch
 if has("gui_running")
     set lines=30 columns=85
 endif
+
+let mapleader=","
+
+nnoremap <leader>l :TlistOpen<CR>
+nnoremap <leader>, :b#<CR>
+
+function! UnitTestPython()
+
+    let tests = system("grep -Rl --include=*.py unittest.main .")
+    let results = system("python " . tests)
+
+    let winnum = bufwinnr('__UnitTestResults__')
+    if winnum != -1
+        if winnr() != winnum
+            exec winnum . "wincmd w"
+        endif
+    else
+        belowright split __UnitTestResults__
+        setlocal buftype=nofile
+        resize 15
+    endif
+
+    normal! ggdG
+    call append(0, split(results, '\v\n'))
+endfunction
+
+nnoremap <leader>. :w!<CR>:call UnitTestPython()<CR>
 
 " Status line
 set noruler
