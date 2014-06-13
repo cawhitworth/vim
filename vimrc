@@ -1,3 +1,6 @@
+
+execute pathogen#infect()
+
 colo desert
 syn on
 
