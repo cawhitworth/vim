@@ -43,8 +43,10 @@ nnoremap <leader>, :b#<CR>
 
 function! UnitTestPython()
 
-    let tests = system("grep -Rl --include=*.py unittest.main .")
-    let results = system("python " . tests)
+    let tests = system("C:\\cygwin\\bin\\grep -Rl --include=*.py unittest.main .")
+    let testscript = substitute(tests, '\.py\(.\+\)', '.py', 'g')
+
+    let results = system("python " . testscript)
 
     let winnum = bufwinnr('__UnitTestResults__')
     if winnum != -1
