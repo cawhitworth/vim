@@ -78,8 +78,14 @@ function! Make()
     call append(0, split(make, '\v\n'))
 endfunction
 
-nnoremap <leader>. :w!<CR>:call UnitTestPython()<CR>
 nnoremap <leader>m :w!<CR>:call Make()<CR>
+nnoremap <leader>[ :w!<CR>:call UnitTestPython()<CR>
+
+nnoremap <leader>/ :!ctags -R<CR>
+
+nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>. :CtrlPTag<CR>
+
 
 " Status line
 set noruler
