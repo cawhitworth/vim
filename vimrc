@@ -63,6 +63,8 @@ endfunction
 
 nnoremap <leader>. :w!<CR>:call UnitTestPython()<CR>
 
+nnoremap <leader>p :CtrlP<CR>
+
 " Status line
 set noruler
 set laststatus=2
