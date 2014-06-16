@@ -1,8 +1,14 @@
+execute pathogen#infect()
+
 colo desert
 syn on
 
-filetype plugin on
+filetype plugin indent on
 runtime macros/matchit.vim
+
+au BufRead,BufNewFile *.md set filetype=markdown
+
+set encoding=utf-8
 
 set nowrap         " Don't wrap
 
@@ -24,10 +30,40 @@ set list
 set listchars=tab:>·,trail:·,extends:»,precedes:«
                    " Show tabs, trailing spaces, and long lines
 
+set hlsearch
+
 if has("gui_running")
     set lines=30 columns=85
 endif
 
+let mapleader=","
+
+nnoremap <leader>l :TlistOpen<CR>
+nnoremap <leader>, :b#<CR>
+
+function! UnitTestPython()
+
+    let tests = system("grep -Rl --include=*.py unittest.main .")
+    let results = system("python " . tests)
+
+    let winnum = bufwinnr('__UnitTestResults__')
+    if winnum != -1
+        if winnr() != winnum
+            exec winnum . "wincmd w"
+        endif
+    else
+        belowright split __UnitTestResults__
+        setlocal buftype=nofile
+        resize 15
+    endif
+
+    normal! ggdG
+    call append(0, split(results, '\v\n'))
+endfunction
+
+nnoremap <leader>. :w!<CR>:call UnitTestPython()<CR>
+
+" Status line
 set noruler
 set laststatus=2
 set statusline=
