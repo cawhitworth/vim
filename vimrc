@@ -61,9 +61,14 @@ function! UnitTestPython()
     call append(0, split(results, '\v\n'))
 endfunction
 
-nnoremap <leader>. :w!<CR>:call UnitTestPython()<CR>
+nnoremap <leader>[ :w!<CR>:call UnitTestPython()<CR>
+
+nnoremap <leader>/ :!ctags -R<CR>
 
 nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>. :CtrlPTag<CR>
+
+
 
 " Status line
 set noruler
