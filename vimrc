@@ -61,7 +61,25 @@ function! UnitTestPython()
     call append(0, split(results, '\v\n'))
 endfunction
 
+function! Make()
+    let make = system("make clean ; make all")
+    let winnum = bufwinnr('__Make__')
+    if winnum != -1
+        if winnr() != winnum
+            exec winnum . "wincmd w"
+        endif
+    else
+        belowright split __Make__
+        setlocal buftype=nofile
+        resize 15
+    endif
+
+    normal! ggdG
+    call append(0, split(make, '\v\n'))
+endfunction
+
 nnoremap <leader>. :w!<CR>:call UnitTestPython()<CR>
+nnoremap <leader>m :w!<CR>:call Make()<CR>
 
 " Status line
 set noruler
