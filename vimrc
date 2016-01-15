@@ -43,26 +43,6 @@ let mapleader=","
 nnoremap <leader>l :TlistOpen<CR>
 nnoremap <leader>, :b#<CR>
 
-function! UnitTestPython()
-
-    let tests = system("grep -Rl --include=*.py unittest.main .")
-    let results = system("python " . tests)
-
-    let winnum = bufwinnr('__UnitTestResults__')
-    if winnum != -1
-        if winnr() != winnum
-            exec winnum . "wincmd w"
-        endif
-    else
-        belowright split __UnitTestResults__
-        setlocal buftype=nofile
-        resize 15
-    endif
-
-    normal! ggdG
-    call append(0, split(results, '\v\n'))
-endfunction
-
 function! BuildOutput(output)
     let winnum = bufwinnr('BUILD')
     if winnum != -1
@@ -89,9 +69,8 @@ function! Scons()
     call BuildOutput(scones)
 endfunction
 
-nnoremap <leader>s :w!<CR>:call Scons()<CR>
-nnoremap <leader>m :w!<CR>:call Make()<CR>
-nnoremap <leader>[ :w!<CR>:call UnitTestPython()<CR>
+nnoremap <leader>bs :w!<CR>:call Scons()<CR>
+nnoremap <leader>bm :w!<CR>:call Make()<CR>
 
 nnoremap <leader>/ :!ctags -R<CR>
 
@@ -99,6 +78,7 @@ nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>. :CtrlPTag<CR>
 
 nnoremap <leader>n :%s/<C-V><C-M>/\r/g<CR>
+
 
 " Status line
 set noruler
