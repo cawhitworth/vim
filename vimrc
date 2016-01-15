@@ -32,6 +32,8 @@ set listchars=tab:>·,trail:·,extends:»,precedes:«
 
 set hlsearch
 
+set completeopt=longest,menuone,preview
+
 if has("gui_running")
     set lines=30 columns=85
 endif
