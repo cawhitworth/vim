@@ -1,6 +1,6 @@
 function! UnitTestPython()
 
-    let tests = system("C:\\cygwin\\bin\\grep -Rl --include=*.py unittest.main .")
+    let tests = system("grep -Rl --include=*.py unittest.main .")
     let testscript = substitute(tests, '\.py\(.\+\)', '.py', 'g')
 
     let results = system("python " . testscript)
