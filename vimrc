@@ -1,3 +1,9 @@
+let g:pathogen_disabled = []
+
+if has("win32") || has("win16")
+  call add(g:pathogen_disabled, "taglist")
+endif
+
 execute pathogen#infect()
 
 colo desert
