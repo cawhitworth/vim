@@ -85,6 +85,7 @@ nnoremap <leader>. :CtrlPTag<CR>
 
 nnoremap <leader>n :%s/<C-V><C-M>/\r/g<CR>
 
+nnoremap <leader>f :NERDTree<CR>
 
 " Status line
 set noruler
