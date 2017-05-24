@@ -16,7 +16,7 @@ au BufRead,BufNewFile *.md set filetype=markdown
 
 set encoding=utf-8
 
-set nowrap         " Don't wrap
+set wrap           " Wrap
 
 set tabstop=4      " Indenting 4 chars, soft-tabs
 set shiftwidth=4
@@ -43,6 +43,7 @@ if has("gui_running")
 endif
 
 set t_Co=256
+set mouse=a
 
 let mapleader=","
 
