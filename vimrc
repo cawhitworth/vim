@@ -76,10 +76,23 @@ function! Scons()
     call BuildOutput(scones)
 endfunction
 
+function! Find(what, ext)
+    exec "vimgrep " . a:what . " **/*" . a:ext
+    exec "copen"
+endfunction
+
+function! FindInteractive()
+    call inputsave()
+    let what = input('Find: ')
+    let ext = input('In (extension): ')
+    call inputrestore()
+    call Find(what, ext)
+endfunction
+
 nnoremap <leader>bs :w!<CR>:call Scons()<CR>
 nnoremap <leader>bm :w!<CR>:call Make()<CR>
 
-nnoremap <leader>/ :!ctags -R<CR>
+nnoremap <leader>t :!ctags -R<CR>
 
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>. :CtrlPTag<CR>
@@ -87,6 +100,8 @@ nnoremap <leader>. :CtrlPTag<CR>
 nnoremap <leader>n :%s/<C-V><C-M>/\r/g<CR>
 
 nnoremap <leader>f :NERDTree<CR>
+
+nnoremap <leader>/ :call FindInteractive()<CR>
 
 " Status line
 set noruler
