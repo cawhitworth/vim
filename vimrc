@@ -92,6 +92,9 @@ endfunction
 nnoremap <leader>bs :w!<CR>:call Scons()<CR>
 nnoremap <leader>bm :w!<CR>:call Make()<CR>
 
+nnoremap <leader>co :copen<CR>
+nnoremap <leader>cc :cclose<CR>
+
 nnoremap <leader>t :!ctags -R<CR>
 
 nnoremap <leader>p :CtrlP<CR>
