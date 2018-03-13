@@ -102,9 +102,17 @@ nnoremap <leader>. :CtrlPTag<CR>
 
 nnoremap <leader>n :%s/<C-V><C-M>/\r/g<CR>
 
-nnoremap <leader>f :NERDTree<CR>
+nnoremap <leader>ff :NERDTree<CR>
+nnoremap <leader>fs :NERDTreeFind<CR>
 
 nnoremap <leader>/ :call FindInteractive()<CR>
+
+" Open NERDTree by default
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Close vim if NERDTree is the only buffer
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Status line
 set noruler
