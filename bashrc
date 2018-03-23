@@ -56,7 +56,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-alias git_branch="if [ -e .git/config ]; then git branch | grep \* | cut -d ' ' -f2; fi"
+alias git_branch="if git status > /dev/null 2>&1; then git branch | grep \* | cut -d ' ' -f2; fi"
 
 if [ "$color_prompt" = yes ]; then
     GREEN="\033[01;32m"
