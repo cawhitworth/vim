@@ -83,6 +83,12 @@ endfunction
 
 function! FindInteractive()
     call inputsave()
+
+    " Save my sanity; probably a cleaner way to do this but whatever
+    if &filetype == 'nerdtree'
+        exec "wincmd l"
+    endif
+
     let what = input('Find: ')
     let ext = input('In (extension): ')
     call inputrestore()
