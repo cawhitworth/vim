@@ -77,22 +77,26 @@ function! Scons()
 endfunction
 
 function! Find(what, ext)
+    " Save my sanity; probably a cleaner way to do this but whatever
+    if &filetype == 'nerdtree'
+        exec "wincmd l"
+    endif
+
     exec "vimgrep " . a:what . " **/*" . a:ext
     exec "copen"
 endfunction
 
 function! FindInteractive()
     call inputsave()
-
-    " Save my sanity; probably a cleaner way to do this but whatever
-    if &filetype == 'nerdtree'
-        exec "wincmd l"
-    endif
-
     let what = input('Find: ')
     let ext = input('In (extension): ')
     call inputrestore()
     call Find(what, ext)
+endfunction
+
+function! FindCurrent()
+    exec "vimgrep /".expand("<cword>")."/j **"
+    exec "copen"
 endfunction
 
 nnoremap <leader>bs :w!<CR>:call Scons()<CR>
@@ -112,6 +116,8 @@ nnoremap <leader>ff :NERDTree<CR>
 nnoremap <leader>fs :NERDTreeFind<CR>
 
 nnoremap <leader>/ :call FindInteractive()<CR>
+nnoremap <F12> :call FindCurrent()<CR>
+
 
 " Open NERDTree by default
 autocmd StdinReadPre * let s:std_in=1
@@ -130,3 +136,6 @@ set statusline+=%=             " split
 set statusline+=%l/%L          " line/Length
 set statusline+=\ @\ %c\ (%P)
 hi StatusLine guifg=LightGray guibg=DarkGray ctermfg=7 ctermbg=8
+
+" Make highlighted text actually legible
+hi Search ctermfg=black ctermbg=blue guifg=black guibg=blue
