@@ -107,7 +107,7 @@ function! FindFast(what)
         exec "wincmd l"
     endif
 
-    exec "silent grep --binary-files=without-match --exclude-dir=build --exclude-dir=oe-logs --exclude-dir=oe-workdir --exclude=tags -snR \"".a:what."\" ."
+    exec "silent grep! --binary-files=without-match --exclude-dir=build --exclude-dir=oe-logs --exclude-dir=oe-workdir --exclude=tags -snR \"".a:what."\" ."
     exec "copen"
     exec "redraw!"
 endfunction
