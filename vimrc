@@ -76,13 +76,13 @@ function! Scons()
     call BuildOutput(scones)
 endfunction
 
-function! Find(what, ext)
+function! FindSlow(what, ext)
     " Save my sanity; probably a cleaner way to do this but whatever
     if &filetype == 'nerdtree'
         exec "wincmd l"
     endif
 
-    exec "silent vimgrep " . a:what . " " . a:ext
+    exec "silent vimgrep " . a:what . " **/*" . a:ext
     exec "copen"
 endfunction
 
@@ -91,7 +91,7 @@ function! FindExt()
     let what = input('Find: ')
     let ext = input('In (extension): ')
     call inputrestore()
-    call Find(what, "**/*".ext)
+    call FindSlow(what, ext)
 endfunction
 
 function! Find()
