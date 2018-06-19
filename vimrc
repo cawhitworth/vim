@@ -82,21 +82,38 @@ function! Find(what, ext)
         exec "wincmd l"
     endif
 
-    exec "vimgrep " . a:what . " **/*" . a:ext
+    exec "silent vimgrep " . a:what . " " . a:ext
     exec "copen"
 endfunction
 
-function! FindInteractive()
+function! FindExt()
     call inputsave()
     let what = input('Find: ')
     let ext = input('In (extension): ')
     call inputrestore()
-    call Find(what, ext)
+    call Find(what, "**/*".ext)
+endfunction
+
+function! Find()
+    call inputsave()
+    let what = input('Find: ')
+    call inputrestore()
+    call FindFast(what)
+endfunction
+
+function! FindFast(what)
+    " Save my sanity; probably a cleaner way to do this but whatever
+    if &filetype == 'nerdtree'
+        exec "wincmd l"
+    endif
+
+    exec "silent grep --binary-files=without-match --exclude-dir=build --exclude-dir=oe-logs --exclude-dir=oe-workdir --exclude=tags -snR \"".a:what."\" ."
+    exec "copen"
+    exec "redraw!"
 endfunction
 
 function! FindCurrent()
-    exec "vimgrep /".expand("<cword>")."/j **"
-    exec "copen"
+    call FindFast(expand("<cword>"))
 endfunction
 
 nnoremap <leader>bs :w!<CR>:call Scons()<CR>
@@ -115,7 +132,8 @@ nnoremap <leader>n :%s/<C-V><C-M>/\r/g<CR>
 nnoremap <leader>ff :NERDTree<CR>
 nnoremap <leader>fs :NERDTreeFind<CR>
 
-nnoremap <leader>/ :call FindInteractive()<CR>
+nnoremap <leader>/ :call Find()<CR>
+nnoremap <leader>e :call FindExt()<CR>
 nnoremap <F12> :call FindCurrent()<CR>
 
 
