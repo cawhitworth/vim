@@ -2,6 +2,7 @@ let g:pathogen_disabled = []
 
 if has("win32") || has("win16")
   call add(g:pathogen_disabled, "taglist")
+  set grepprg=grep\ -nH
 endif
 
 execute pathogen#infect()
@@ -30,7 +31,7 @@ set number         " Line numbers FTW
 set showmatch      " Show matching brackets
 set incsearch      " Search-as-you-type
 
-set cc=80          " Highlight column 80
+set cc=100         " Highlight column 100
 
 set list
 set listchars=tab:>·,trail:·,extends:»,precedes:«
