@@ -39,6 +39,9 @@ set listchars=tab:>·,trail:·,extends:»,precedes:«
 
 set hlsearch
 
+set nomodeline      " Disable modelines
+set modelines=0
+
 if has("gui_running")
     set lines=30 columns=85
 endif
