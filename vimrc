@@ -32,6 +32,7 @@ set showmatch      " Show matching brackets
 set incsearch      " Search-as-you-type
 
 set cc=100         " Highlight column 100
+set textwidth=100  " Wrap at column 100
 
 set list
 set listchars=tab:>·,trail:·,extends:»,precedes:«
@@ -51,8 +52,6 @@ set mouse=a
 
 let mapleader=","
 
-nnoremap <leader>l :TlistOpen<CR>
-nnoremap <leader>, :b#<CR>
 
 function! BuildOutput(output)
     let winnum = bufwinnr('BUILD')
@@ -120,8 +119,16 @@ function! FindCurrent()
     call FindFast(expand("<cword>"))
 endfunction
 
+command! DiffT NERDTreeClose | windo diffthis
+command! DiffO windo diffoff | NERDTree
+
+nnoremap <leader>dt :DiffT<CR>
+nnoremap <leader>do :DiffO<CR>
+
 nnoremap <leader>bs :w!<CR>:call Scons()<CR>
 nnoremap <leader>bm :w!<CR>:call Make()<CR>
+
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 nnoremap <leader>co :copen<CR>
 nnoremap <leader>cc :cclose<CR>
@@ -139,6 +146,8 @@ nnoremap <leader>fs :NERDTreeFind<CR>
 nnoremap <leader>/ :call Find()<CR>
 nnoremap <leader>e :call FindExt()<CR>
 nnoremap <F12> :call FindCurrent()<CR>
+
+nnoremap <leader>, :b#<CR>
 
 nmap <leader>1 <Plug>BufTabLine.Go(1)
 nmap <leader>2 <Plug>BufTabLine.Go(2)
